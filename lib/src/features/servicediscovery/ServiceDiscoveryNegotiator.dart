@@ -11,7 +11,6 @@ import 'package:xmpp_stone/src/features/Negotiator.dart';
 import 'package:xmpp_stone/src/features/servicediscovery/Feature.dart';
 import 'package:xmpp_stone/src/features/servicediscovery/Identity.dart';
 import 'package:xmpp_stone/src/features/servicediscovery/ServiceDiscoverySupport.dart';
-import 'Feature.dart';
 
 class ServiceDiscoveryNegotiator extends Negotiator {
   static const String NAMESPACE_DISCO_INFO =
@@ -79,8 +78,7 @@ class ServiceDiscoveryNegotiator extends Negotiator {
       state = NegotiatorState.NEGOTIATING;
       subscription = _connection.inStanzasStream.listen(_parseStanza);
       _sendServiceDiscoveryRequest();
-    } else if (state == NegotiatorState.DONE) {
-    }
+    } else if (state == NegotiatorState.DONE) {}
   }
 
   void _sendServiceDiscoveryRequest() {
@@ -122,8 +120,8 @@ class ServiceDiscoveryNegotiator extends Negotiator {
   }
 
   bool isFeatureSupported(String feature) {
-    return _supportedFeatures.firstWhereOrNull(
-            (element) => element.xmppVar == feature) !=
+    return _supportedFeatures
+            .firstWhereOrNull((element) => element.xmppVar == feature) !=
         null;
   }
 
@@ -146,10 +144,12 @@ class ServiceDiscoveryNegotiator extends Negotiator {
     //iqStanza.fromJid = _connection.fullJid; //do not send for now
     iqStanza.toJid = request.fromJid;
     var query = XmppElement();
+    query.name = 'query';
     query.addAttribute(XmppAttribute('xmlns', NAMESPACE_DISCO_INFO));
     SERVICE_DISCOVERY_SUPPORT_LIST.forEach((featureName) {
       var featureElement = XmppElement();
-      featureElement.addAttribute(XmppAttribute('feature', featureName));
+      featureElement.name = 'feature';
+      featureElement.addAttribute(XmppAttribute('var', featureName));
       query.addChild(featureElement);
     });
     iqStanza.addChild(query);

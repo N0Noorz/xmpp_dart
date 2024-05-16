@@ -59,6 +59,20 @@ Introducing optional parameter for domain name in account settings
 
 - Initial published version
 
+## 0.4.4-dev.5
+
+- Update dependencies to the latest possible versions;
+
+## 0.4.4-dev.4
+
+- update dependencies to latest possible versions;
+
+## 0.4.4-dev.3
+
+- Revert `descendants` processing (fix some issues on the different Chat Servers);
+- Fix `MessageArchiveManager` query date fields are not in `xep-0082` format (thanks [HaoCherHong](https://github.com/HaoCherHong/));
+- Bug fix to xep-0030 support (thanks [HaoCherHong](https://github.com/HaoCherHong/));
+- Fix auto-fixable lint warnings (thanks [tanukijs](https://github.com/tanukijs));
 
 ## 0.4.4-dev.2
 
